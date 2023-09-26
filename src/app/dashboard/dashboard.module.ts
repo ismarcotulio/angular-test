@@ -5,6 +5,7 @@ import { DemoMaterialModule } from '../demo-material-module';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutes } from './dashboard.routing';
 
+
 @NgModule({
   imports: [
     CommonModule,

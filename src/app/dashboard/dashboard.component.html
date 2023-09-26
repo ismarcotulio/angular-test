@@ -2,6 +2,12 @@
 <!-- Simple four boxes Row -->
 <!-- ============================================================== -->
 <div class="row">
+  <div class="col-lg-12 col-sm-12">
+    <app-load-excel (updateSalesProductData)="updateSalesProduct($event)"></app-load-excel>
+    <li *ngFor="let saleProductData of salesProductData;">
+      {{saleProductData.codigo_venta}}
+    </li>
+  </div>
   <!-- column -->
   <!--div class="col-lg-8 col-sm-12">
     <app-sales-overview></app-sales-overview>
