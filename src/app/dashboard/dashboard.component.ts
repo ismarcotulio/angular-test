@@ -5,6 +5,8 @@ import { ProfileComponent } from './dashboard-components/profile/profile.compone
 import { ContactsComponent } from './dashboard-components/contacts/contacts.component';
 import { ActivityTimelineComponent } from './dashboard-components/activity-timeline/activity-timeline.component';
 import { LoadExcelComponent } from './dashboard-components/load-excel/load-excel.component';
+import { GridSalesComponent } from './dashboard-components/grid-sales/grid-sales.component';
+
 
 import { ProductSales, productSales } from './dashboard-data';
 import { CommonModule } from '@angular/common';
@@ -19,16 +21,24 @@ import { CommonModule } from '@angular/common';
 		ProfileComponent, 
 		ContactsComponent, 
 		ActivityTimelineComponent,
-		LoadExcelComponent
+		LoadExcelComponent,
+		GridSalesComponent
 	],
 	templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements AfterViewInit {
-
+	
 	salesProductData:ProductSales[] = productSales
+	salesProductDataSource:any = {}
+	test:any = "esta es una prueba"
+
 
 	updateSalesProduct(newSalesProduct: ProductSales[]){
 		this.salesProductData = newSalesProduct
+	}
+
+	updateSalesProductSource(newSalesProductSource: any){
+		this.salesProductDataSource = newSalesProductSource
 	}
 
 	ngAfterViewInit() { }

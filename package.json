@@ -45,5 +45,12 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "node-sass": "^8.0.0",
     "typescript": "~5.0.4"
-  }
+  },
+  "include": [
+    "src/**/*"
+  ],
+"files": [
+  "src/app/app.module.ts",
+  "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxbargauge.ts"
+]
 }

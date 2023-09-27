@@ -20,6 +20,8 @@ export class LoadExcelComponent implements OnInit {
   private reader;
 
   @Output() updateSalesProductData = new EventEmitter <ProductSales[]>();
+  @Output() updateSalesProductDataSource = new EventEmitter <any>();
+
 
   onFileChange(args: any) {
     let workBook:any = null;
@@ -35,6 +37,11 @@ export class LoadExcelComponent implements OnInit {
         return initial;
       }, {});
       this.updateSalesProductData.emit(jsonData?.Sheet1)
+      this.updateSalesProductDataSource.emit(
+        new jqx.dataAdapter({
+          localData: jsonData?.Sheet1
+        })
+      )
       
     }
     this.reader.readAsBinaryString(file);

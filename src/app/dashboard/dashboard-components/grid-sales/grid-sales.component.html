@@ -1,0 +1,20 @@
+<mat-card>
+    <mat-card-content>
+        <mat-card-title>Ventas</mat-card-title>
+        <mat-card-subtitle>Descripcion del componente</mat-card-subtitle>
+        <jqxGrid 
+            [selectionmode]="'checkbox'" 
+            [source]="source" 
+            [theme]="'material'" 
+            [autoheight]="true" 
+            [pageable]="true" 
+            [altrows]="true" 
+            [filterable]="true" 
+            [sortable]="true" 
+            [columns]="columns" 
+            [width]="width"
+            [columnsresize]="true"
+        >
+        </jqxGrid> 
+    </mat-card-content>
+</mat-card>

@@ -1,37 +1,18 @@
-<!-- ============================================================== -->
-<!-- Simple four boxes Row -->
-<!-- ============================================================== -->
 <div class="row">
   <div class="col-lg-12 col-sm-12">
-    <app-load-excel (updateSalesProductData)="updateSalesProduct($event)"></app-load-excel>
-    <li *ngFor="let saleProductData of salesProductData;">
-      {{saleProductData.codigo_venta}}
-    </li>
+    <app-load-excel 
+      (updateSalesProductData)="updateSalesProduct($event)"
+      (updateSalesProductDataSource)="updateSalesProductSource($event)"
+    ></app-load-excel>
   </div>
-  <!-- column -->
-  <!--div class="col-lg-8 col-sm-12">
-    <app-sales-overview></app-sales-overview>
-  </div-->
-  <!-- column -->
-  <!-- column -->
-  <!--div class="col-lg-4 col-sm-12">
-    <app-our-visiter></app-our-visiter>
-  </div-->
-  <!-- column -->
 </div>
 
-<!-- ============================================================== -->
-<!-- Image Card row-->
-<!-- ============================================================== -->
 <div class="row">
-  <!-- Card column -->
-  <!--div class="col-lg-3 col-sm-12">
-    <app-profile></app-profile>
-    <app-contacts></app-contacts>
-  </div-->
-  <!-- Card column -->
-  <!-- Card column -->
-  <!--div class="col-lg-9 col-sm-12">
-    <app-activity-timeline></app-activity-timeline>
-  </div-->
+  <div class="col-lg-12 col-sm-12">
+    <app-grid-sales 
+      [salesProductData]="salesProductData" 
+      [source]="salesProductDataSource"
+    ></app-grid-sales>
+  </div>
 </div>
+

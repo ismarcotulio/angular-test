@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DemoMaterialModule } from '../demo-material-module';
+import { JQWidgetsModule } from '../jqwidgets-module';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutes } from './dashboard.routing';
 
@@ -10,8 +11,9 @@ import { DashboardRoutes } from './dashboard.routing';
   imports: [
     CommonModule,
     DemoMaterialModule,
+    JQWidgetsModule,
     RouterModule.forChild(DashboardRoutes),
-    DashboardComponent,
+    DashboardComponent
   ],
 })
 export class DashboardModule { }

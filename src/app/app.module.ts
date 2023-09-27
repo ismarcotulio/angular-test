@@ -13,22 +13,24 @@ import { AppHeaderComponent } from './layouts/full/header/header.component';
 import { AppSidebarComponent } from './layouts/full/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoMaterialModule } from './demo-material-module';
+import { JQWidgetsModule } from './jqwidgets-module';
 
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     FullComponent,
     AppHeaderComponent,
-    SpinnerComponent,
-    
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     DemoMaterialModule,
+    JQWidgetsModule,
     FormsModule,
     HttpClientModule,
     SharedModule,
