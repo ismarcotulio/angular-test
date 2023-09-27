@@ -23,7 +23,11 @@ export class GridSalesComponent implements AfterViewInit, OnInit {
 
 	@Input() source:any = {}
 
+	@Input() variables:any = {}
+
 	width = 900
+
+
 
   columns = [
 		{text: 'Codigo', datafield: 'codigo_venta', width: 60 },
@@ -41,6 +45,7 @@ export class GridSalesComponent implements AfterViewInit, OnInit {
  
 
   constructor() {
+		
     
   }
 
@@ -51,5 +56,8 @@ export class GridSalesComponent implements AfterViewInit, OnInit {
   ngAfterViewInit() {
 	
   }
+
+	
+
 
 }

@@ -3,6 +3,7 @@
     <app-load-excel 
       (updateSalesProductData)="updateSalesProduct($event)"
       (updateSalesProductDataSource)="updateSalesProductSource($event)"
+      (updateSalesVariables)="updateSalesVariables($event)"
     ></app-load-excel>
   </div>
 </div>
@@ -12,6 +13,7 @@
     <app-grid-sales 
       [salesProductData]="salesProductData" 
       [source]="salesProductDataSource"
+      [variables]="variables"
     ></app-grid-sales>
   </div>
 </div>

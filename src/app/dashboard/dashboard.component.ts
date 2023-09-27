@@ -30,6 +30,7 @@ export class DashboardComponent implements AfterViewInit {
 	
 	salesProductData:ProductSales[] = productSales
 	salesProductDataSource:any = {}
+	variables:any = {}
 	test:any = "esta es una prueba"
 
 
@@ -39,6 +40,10 @@ export class DashboardComponent implements AfterViewInit {
 
 	updateSalesProductSource(newSalesProductSource: any){
 		this.salesProductDataSource = newSalesProductSource
+	}
+
+	updateSalesVariables(newSalesVariables: any){
+		this.variables = newSalesVariables
 	}
 
 	ngAfterViewInit() { }

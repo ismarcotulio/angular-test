@@ -21,6 +21,49 @@ export class LoadExcelComponent implements OnInit {
 
   @Output() updateSalesProductData = new EventEmitter <ProductSales[]>();
   @Output() updateSalesProductDataSource = new EventEmitter <any>();
+  @Output() updateSalesVariables = new EventEmitter <any>();
+
+  getVariables = (salesProductData:any) => {
+    let cantidadVentas = 0
+    let cantidadVentasCredito = 0
+    let cantidadVentasContado = 0
+    let cantidadProductosOrigenInternacional = 0
+    let cantidadProductosOrigenNacional = 0
+    let totalVentas = 0
+    let totalUtilidad = 0
+    let totalGanancias = 0
+
+		salesProductData?.map((sale:any)=>{
+      cantidadVentas = cantidadVentas + 1
+      totalVentas = totalVentas + sale.precio_venta
+      totalUtilidad = totalUtilidad + sale.valor_compra
+      totalGanancias = totalVentas - totalUtilidad
+      if(sale.tipo_venta === 'Contado'){
+        cantidadVentasContado = cantidadVentasContado + 1
+      }else{
+        cantidadVentasCredito = cantidadVentasCredito + 1
+      }
+      if(sale.origen_producto === 'Nacional'){
+        cantidadProductosOrigenNacional = cantidadProductosOrigenNacional + 1
+      }else{
+        cantidadProductosOrigenInternacional = cantidadProductosOrigenInternacional + 1
+      }
+      console.log(sale)
+    })
+
+    let variables = {
+			"cantidadVentas":cantidadVentas,
+			"cantidadVentasCredito":cantidadVentasCredito,
+			"cantidadVentasContado":cantidadVentasContado,
+			"cantidadProductosOrigenInternacional": cantidadProductosOrigenInternacional,
+			"cantidadProductosOrigenNacional": cantidadProductosOrigenNacional,
+			"totalVentas":totalVentas,
+			"totalUtilidad": totalUtilidad,
+			"totalGanancias": totalGanancias
+		}
+		
+		return variables
+	}
 
 
   onFileChange(args: any) {
@@ -41,6 +84,9 @@ export class LoadExcelComponent implements OnInit {
         new jqx.dataAdapter({
           localData: jsonData?.Sheet1
         })
+      )
+      this.updateSalesVariables.emit(
+        this.getVariables(jsonData?.Sheet1)
       )
       
     }
