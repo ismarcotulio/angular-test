@@ -17,6 +17,10 @@ import { JQWidgetsModule } from './jqwidgets-module';
 
 import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
+import { StoreModule } from '@ngrx/store';
+
+import { cityReducer } from './store/city.reducer';
+import { salesReducer } from './store/sales.reducer';
 
 
 @NgModule({
@@ -35,7 +39,8 @@ import { SpinnerComponent } from './shared/spinner.component';
     HttpClientModule,
     SharedModule,
     RouterModule.forRoot(AppRoutes),
-    AppSidebarComponent
+    AppSidebarComponent,
+    StoreModule.forRoot({ city: cityReducer, sales: salesReducer })
   ],
   providers: [
     {

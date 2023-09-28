@@ -7,6 +7,11 @@ import * as XLSX from 'xlsx';
 
 import { ProductSales, productSales } from '../../dashboard-data';
 
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { city } from 'src/app/store/city.action';
+import { sales } from 'src/app/store/sales.action';
+
 @Component({
   selector: 'app-load-excel',
   standalone: true,
@@ -22,6 +27,25 @@ export class LoadExcelComponent implements OnInit {
   @Output() updateSalesProductData = new EventEmitter <ProductSales[]>();
   @Output() updateSalesProductDataSource = new EventEmitter <any>();
   @Output() updateSalesVariables = new EventEmitter <any>();
+  @Output() updateCities = new EventEmitter <any>();
+
+  city$: Observable<string>
+
+  getCities = (salesProductData:any) => {
+    let cities:any = []
+    let state:any = false
+    salesProductData?.map((sale:any)=>{
+      cities.map((city:any)=>{
+        if(city===sale.ciudad){
+          state = true
+        }
+      })
+      if(state===false){cities.push(sale.ciudad)}
+      state = false
+    })
+    return cities
+  }
+
 
   getVariables = (salesProductData:any) => {
     let cantidadVentas = 0
@@ -48,7 +72,6 @@ export class LoadExcelComponent implements OnInit {
       }else{
         cantidadProductosOrigenInternacional = cantidadProductosOrigenInternacional + 1
       }
-      console.log(sale)
     })
 
     let variables = {
@@ -80,23 +103,31 @@ export class LoadExcelComponent implements OnInit {
         return initial;
       }, {});
       this.updateSalesProductData.emit(jsonData?.Sheet1)
+      this.store.dispatch(sales(new jqx.dataAdapter({
+        localData: {...jsonData?.Sheet1}
+      })));
+
       this.updateSalesProductDataSource.emit(
         new jqx.dataAdapter({
-          localData: jsonData?.Sheet1
+          localData: {...jsonData?.Sheet1}
         })
       )
       this.updateSalesVariables.emit(
         this.getVariables(jsonData?.Sheet1)
+      )
+      this.updateCities.emit(
+        this.getCities(jsonData?.Sheet1)
       )
       
     }
     this.reader.readAsBinaryString(file);
   }
 
-  constructor() {
+  constructor(private store: Store<{ city: string }>) {
     this.excelIO = new Excel.IO();
     this.spread = new GC.Spread.Sheets.Workbook();
     this.reader = new FileReader();
+    this.city$ = store.select('city');
   }
 
 

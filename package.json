@@ -23,6 +23,7 @@
     "@grapecity/spread-excelio": "^16.2.3",
     "@grapecity/spread-sheets": "^16.2.3",
     "@grapecity/spread-sheets-angular": "^16.2.3",
+    "@ngrx/store": "^16.2.0",
     "apexcharts": "^3.40.0",
     "hammerjs": "^2.0.8",
     "jqwidgets-ng": "^17.0.0",
@@ -49,8 +50,8 @@
   "include": [
     "src/**/*"
   ],
-"files": [
-  "src/app/app.module.ts",
-  "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxbargauge.ts"
-]
+  "files": [
+    "src/app/app.module.ts",
+    "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxbargauge.ts"
+  ]
 }
