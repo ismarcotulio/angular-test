@@ -11,18 +11,19 @@ import { ProductSales, productSales } from '../../dashboard-data';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { city } from 'src/app/store/city.action';
+import { SalesOverviewComponent } from '../sales-overview/sales-overview.component';
 
 @Component({
   selector: 'app-grid-sales',
   standalone: true,
-  imports: [CommonModule, DemoMaterialModule, JQWidgetsModule, NgIf, NgFor, ],
+  imports: [SalesOverviewComponent, CommonModule, DemoMaterialModule, JQWidgetsModule, NgIf, NgFor, ],
   templateUrl: './grid-sales.component.html',
   styleUrls: ['./grid-sales.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class GridSalesComponent implements AfterViewInit, OnInit {
 
-	@Input() salesProductData:any = {}
+	@Input() salesProductData:any = []
 
 	@Input() test:any = {}
 
@@ -33,6 +34,8 @@ export class GridSalesComponent implements AfterViewInit, OnInit {
 	@Input() variables:any = {}
 
 	@Input() cities:any = []
+
+	@Input() topFiveSaleProduct:any = {}
 
 	city$: Observable<string>
 	sales$: Observable<any>
@@ -66,11 +69,9 @@ export class GridSalesComponent implements AfterViewInit, OnInit {
   constructor(private store: Store<{ city: string, sales: any }>) {
 		this.city$ = store.select('city');
 		this.sales$ = store.select('sales');
-		console.log(this.dataSales)
   }
 
 	setCityFilter() {
-		console.log(this.selected)
     this.store.dispatch(city({ city: this.selected }));
 		let sales = this.getSalesByCity(this.selected)
 		this.source = new jqx.dataAdapter({

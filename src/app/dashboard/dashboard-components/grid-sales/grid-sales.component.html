@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="salesProductData.length > 0">
     <mat-card-content>
         <mat-card-title>Ventas</mat-card-title>
         <mat-card-subtitle>
@@ -36,3 +36,12 @@
         </jqxGrid> 
     </mat-card-content>
 </mat-card>
+
+<div class="row" *ngIf="salesProductData.length > 0">
+    <div class="col-lg-12 col-sm-12">
+      <app-sales-overview
+      [salesProductData]="salesProductData" 
+      [topFiveSaleProduct]="topFiveSaleProduct" 
+      ></app-sales-overview>
+    </div>
+  </div>

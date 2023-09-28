@@ -28,11 +28,12 @@ import { CommonModule } from '@angular/common';
 })
 export class DashboardComponent implements AfterViewInit {
 	
-	salesProductData:ProductSales[] = productSales
+	salesProductData:ProductSales[] = []
 	salesProductDataSource:any = {}
 	variables:any = {}
 	cities:any = []
 	test:any = "esta es una prueba"
+	topFiveSaleProduct = {}
 
 
 	updateSalesProduct(newSalesProduct: ProductSales[]){
@@ -49,6 +50,10 @@ export class DashboardComponent implements AfterViewInit {
 
 	updateCities(newCities: any){
 		this.cities = newCities
+	}
+
+	updateTopFiveSaleProduct(newTopFiveSaleProduct: any){
+		this.topFiveSaleProduct = newTopFiveSaleProduct
 	}
 
 	ngAfterViewInit() { }

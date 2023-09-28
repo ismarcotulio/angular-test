@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, Input } from "@angular/core";
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -40,16 +40,17 @@ export class SalesOverviewComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent = Object.create(null);
   public chartOptions: Partial<ChartOptions>;
 
+  @Input() salesProductData:any = []
+  @Input() topFiveSaleProduct:any = {}
+
+
   constructor() {
+    
     this.chartOptions = {
       series: [
         {
-          name: "Pixel",
-          data: [44, 55, 57, 56, 61, 58],
-        },
-        {
-          name: "Ample",
-          data: [76, 85, 101, 98, 87, 105],
+          name: "Ventas",
+          data: this.topFiveSaleProduct.data,
         },
       ],
       chart: {
@@ -76,7 +77,7 @@ export class SalesOverviewComponent implements OnInit {
         colors: ["transparent"],
       },
       xaxis: {
-        categories: ["Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+        categories: this.topFiveSaleProduct.categories,
       },
 
       legend: {
@@ -92,5 +93,54 @@ export class SalesOverviewComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void { }
+  
+
+
+  ngOnInit(): void {
+    this.chartOptions = {
+      series: [
+        {
+          name: "Ventas",
+          data: this.topFiveSaleProduct.data,
+        },
+      ],
+      chart: {
+        type: "bar",
+        fontFamily: "Poppins,sans-serif",
+        height: 320,
+      },
+      grid: {
+        borderColor: "rgba(0,0,0,.2)",
+        strokeDashArray: 3,
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: "30%",
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        show: true,
+        width: 2,
+        colors: ["transparent"],
+      },
+      xaxis: {
+        categories: this.topFiveSaleProduct.categories,
+      },
+
+      legend: {
+        show: false,
+      },
+      fill: {
+        colors: ["#26c6da", "#1e88e5"],
+        opacity: 1,
+      },
+      tooltip: {
+        theme: "dark",
+      },
+    };
+   }
 }

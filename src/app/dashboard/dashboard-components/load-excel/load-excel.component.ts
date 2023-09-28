@@ -28,6 +28,7 @@ export class LoadExcelComponent implements OnInit {
   @Output() updateSalesProductDataSource = new EventEmitter <any>();
   @Output() updateSalesVariables = new EventEmitter <any>();
   @Output() updateCities = new EventEmitter <any>();
+  @Output() updateTopFiveSaleProduct = new EventEmitter <any>();
 
   city$: Observable<string>
 
@@ -118,9 +119,45 @@ export class LoadExcelComponent implements OnInit {
       this.updateCities.emit(
         this.getCities(jsonData?.Sheet1)
       )
+      this.updateTopFiveSaleProduct.emit(
+        this.getDataSaleTopFiveProducts(jsonData?.Sheet1)
+      )
       
     }
     this.reader.readAsBinaryString(file);
+  }
+
+  getDataSaleTopFiveProducts(salesProductData:any){
+    let dataSale:any = {}
+    let sortDataSale: any = []
+    let categories:any = []
+    let data:any = []
+
+    salesProductData.map((sale:any)=>{
+      if(dataSale[sale.producto] === undefined){
+        dataSale[sale.producto] = 1
+      }else{
+        dataSale[sale.producto] = dataSale[sale.producto]+1
+      }
+    })
+
+    var items = Object.keys(dataSale).map(function(key) {
+      return [key, dataSale[key]];
+    });
+
+    items.sort(function(first, second) {
+      return second[1] - first[1];
+    });
+
+    sortDataSale = items.slice(0, 5)
+    sortDataSale.map((item:any[])=>{
+      categories.push(item[0])
+      data.push(item[1])
+    })
+    return {
+      "categories": categories,
+      "data": data
+    }
   }
 
   constructor(private store: Store<{ city: string }>) {
